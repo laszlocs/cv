@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>Önéletrajz</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z' fill='%232d7fb9'/%3E%3C/svg%3E" type="image/svg+xml">  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
+
+    :root {
+      --primary-color: #2d7fb9;
+      --secondary-color: #1a5a8a;
+      --accent-color: #e9c46a;
+      --light-color: #f9f9f9;
+      --dark-color: #333333;
+      --gray-color: #666666;
+      --border-radius: 12px;
+      --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      --transition: all 0.3s ease;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      overflow-x: hidden;
+      text-rendering: optimizeLegibility;
+      scroll-behavior: smooth;
+      margin: 0;
+      font-family: "Nunito", sans-serif;
+      font-size: clamp(16px, 2vw, 18px);
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+      color: var(--dark-color);
+      line-height: 1.6;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      display: grid;
+      gap: 25px;
+      max-width: 1400px;
+      margin: 0 auto;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+
+    .box {
+      background-color: white;
+      border: 1px solid #e0e0e0;
+      padding: 25px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+    }
+
+    .box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .profile {
+      color: var(--dark-color);
+      line-height: 1.8;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    }
+
+    .center-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .profile-img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid white;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3.5rem;
+      font-weight: 700;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 25px;
+      padding: 15px 0;
+      border-bottom: 2px solid var(--primary-color);
+    }
+
+    .title .bold {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--dark-color);
+      margin-bottom: 8px;
+    }
+
+    .title .regular {
+      font-size: 1.3rem;
+      color: var(--secondary-color);
+      line-height: 1.5;
+    }
+
+    .title .regular a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .title .regular a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-color);
+      transition: var(--transition);
+    }
+
+    .title .regular a:hover {
+      color: var(--accent-color);
+    }
+
+    .title .regular a:hover::after {
+      width: 100%;
+    }
+
+    .info-list {
+      list-style: none;
+      margin-top: 20px;
+    }
+
+    .info-list li {
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      transition: var(--transition);
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    .info-list li:hover {
+      background-color: rgba(45, 127, 185, 0.05);
+      transform: translateX(5px);
+    }
+
+    .info-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .icon-wrapper {
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      flex-shrink: 0;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .info-text {
+      font-size: 1.1rem;
+      color: var(--dark-color);
+    }
+
+    .info-text a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .info-text a:hover {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--secondary-color);
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent-color);
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--primary-color);
+    }
+
+    .skill {
+      margin-bottom: 25px;
+    }
+
+    .skill:last-child {
+      margin-bottom: 0;
+    }
+
+    .skill-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .skill-bar {
+      background-color: #e0e0e0;
+      border-radius: 20px;
+      overflow: hidden;
+      height: 14px;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .skill-fill {
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      height: 100%;
+      text-align: right;
+      font-size: 0.75rem;
+      color: white;
+      padding-right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      border-radius: 20px;
+      transition: width 1.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .resume-section {
+      margin-bottom: 30px;
+    }
+
+    .resume-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .time-period {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .time-badge {
+      background: var(--primary-color);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-right: 15px;
+      flex-shrink: 0;
+      box-shadow: 0 3px 8px rgba(45, 127, 185, 0.3);
+    }
+
+    .time-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--accent-color);
+      color: var(--dark-color);
+      border-radius: 50%;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+
+    .position {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--secondary-color);
+      margin-bottom: 5px;
+    }
+
+    .company {
+      font-size: 1.1rem;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .description {
+      color: var(--gray-color);
+      margin-left: 43px;
+      border-left: 2px solid var(--accent-color);
+      padding-left: 20px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 50px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .footer-text {
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+    }
+
+    .print-btn {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 1.1rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-top: 15px;
+    }
+
+    .print-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      background: var(--accent-color);
+    }
+
+    /* Animációk */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .box {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+
+    .box:nth-child(1) { animation-delay: 0.1s; }
+    .box:nth-child(2) { animation-delay: 0.2s; }
+    .box:nth-child(3) { animation-delay: 0.3s; }
+    .box:nth-child(4) { animation-delay: 0.4s; }
+    .box:nth-child(5) { animation-delay: 0.5s; }
+    .box:nth-child(6) { animation-delay: 0.6s; }
+
+    /* Reszponzív design */
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      
+      .profile-img {
+        width: 150px;
+        height: 150px;
+        font-size: 2.8rem;
+      }
+      
+      .title .bold {
+        font-size: 1.8rem;
+      }
+      
+      .title .regular {
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+      
+      .box {
+        padding: 20px;
+      }
+      
+      .profile-img {
+        width: 120px;
+        height: 120px;
+        font-size: 2.2rem;
+      }
+      
+      .info-list li {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .icon-wrapper {
+        margin-bottom: 10px;
+      }
+      
+      .time-period {
+        flex-wrap: wrap;
+      }
+      
+      .time-badge {
+        margin-bottom: 8px;
+      }
+    }
+  </style>  
+</head>
+
+<body>
+  <div class="container">
+    <!-- Profil szekció -->
+    <div class="box profile">
+      <div class="center-container">
+        <img class="profile-img" src="img/IMG_1322 portre-bg.png" alt="Profilkép"></img>
+      </div>
+      <div class="title">
+        <p class="bold">Csókos László</p>
+        <p class="regular">Központi irattáros <br>
+          Számítógép rendszergazda <br> Weblapkészítő Designer
+          <br> Webáruház <a href="https://laszlocscv.my.canva.site/">adminisztráció</a>                    
+        </p>
+      </div>
+      <p>
+        Tapasztalt informatikus és irattáros, aki több mint 40 éves szakmai tapasztalattal rendelkezik. Számítógépes rendszergazdai és webfejlesztői ismereteimet folyamatosan fejlesztem, hogy a legmodernebb technológiákat alkalmazhassam a munkám során.
+      </p>
+      <p>
+        Kiemelt erősségeim közé tartozik a problémamegoldó képességem, a precizitás, valamint a hatékony kommunikáció. Csapatban és önállóan egyaránt jól dolgozom, mindig a minőségi eredményekre fókuszálva.
+      </p>
+    </div>
+
+    <!-- Kapcsolat szekció -->
+    <div class="box"> 
+      <section class="contact">
+        <h2><i class="fas fa-address-card"></i> Kapcsolat</h2>
+        <ul class="info-list">                
+          <li>                                  
+            <div class="icon-wrapper">
+              <i class="fas fa-home"></i>
+            </div>
+            <div class="info-text">
+              <a href="https://www.google.com/maps/place/Budapest">Budapest, Visegrádi utca 18/B.</a>
+            </div>
+          </li>
+          <li>                  
+            <div class="icon-wrapper">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <div class="info-text">
+              <a href="tel:+36306810400">+36 30 681 0400</a>
+            </div>
+          </li>
+          <li>                  
+            <div class="icon-wrapper">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="info-text">
+              <a href="mailto:laszlocss@gmail.com">laszlocss@gmail.com</a>
+            </div>
+          </li>
+          <li>                  
+            <div class="icon-wrapper">
+              <i class="fas fa-globe"></i>
+            </div>
+            <div class="info-text">
+              <a href="http://www.laszlocs.nhely.hu/pages/cv/index-three.html">Weblap</a>
+            </div>
+          </li>          
+          <li>                  
+            <div class="icon-wrapper">
+              <i class="fab fa-github"></i>
+            </div>
+            <div class="info-text">
+              <a href="https://github.com/laszlocs?tab=repositories">github.com/laszlocs</a>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- Program ismeretek -->
+    <div class="box">
+      <section class="skills">
+        <h2><i class="fas fa-laptop-code"></i> Programok</h2>
+        <div class="skill">
+          <div class="skill-label">
+            <span>Word, Excel</span>
+            <span>95%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" style="width: 95%;">95%</div>
+          </div>
+        </div>
+        <div class="skill">
+          <div class="skill-label">
+            <span>VSCode</span>
+            <span>95%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" style="width: 95%;">95%</div>
+          </div>
+        </div>
+        <div class="skill">
+          <div class="skill-label">
+            <span>PCode</span>
+            <span>90%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" style="width: 90%;">90%</div>
+          </div>
+        </div>
+        <div class="skill">
+          <div class="skill-label">
+            <span>Affinity Designer</span>
+            <span>90%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" style="width: 90%;">90%</div>
+          </div>
+        </div>
+        <div class="skill">
+          <div class="skill-label">
+            <span>Affinity Photo</span>
+            <span>70%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" style="width: 70%;">70%</div>
+          </div>
+        </div>
+        <div class="skill">
+          <div class="skill-label">
+            <span>Affinity Publisher</span>
+            <span>50%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" style="width: 50%;">50%</div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <!-- Számítástechnikai ismeretek -->
+    <div class="box">   
+      <section class="skills">
+        <h2><i class="fas fa-code"></i> Számítástechnikai ismeretek</h2>
+        <div class="skill">
+          <div class="skill-label">
+            <span>HTML 5</span>
+            <span>95%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" style="width: 95%;">95%</div>
+          </div>
+        </div>
+        <div class="skill">
+          <div class="skill-label">
+            <span>CSS 3</span>
+            <span>90%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" style="width: 90%;">90%</div>
+          </div>
+        </div>
+        <div class="skill">
+          <div class="skill-label">
+            <span>JavaScript</span>
+            <span>60%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" style="width: 60%;">60%</div>
+          </div>
+        </div>
+        <div class="skill">
+          <div class="skill-label">
+            <span>WordPress</span>
+            <span>70%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" style="width: 70%;">70%</div>
+          </div>
+        </div>
+        <div class="skill">
+          <div class="skill-label">
+            <span>Joomla</span>
+            <span>50%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" style="width: 50%;">50%</div>
+          </div>
+        </div>
+        <div class="skill">
+          <div class="skill-label">
+            <span>PHP</span>
+            <span>55%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" style="width: 55%;">55%</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Munkatapasztalat -->
+    <div class="box">
+      <section class="resume">
+        <h2><i class="fas fa-briefcase"></i> Előző munkahelyek</h2>
+        
+        <div class="resume-section">
+          <div class="time-period">
+            <div class="time-badge">1994 - 2016</div>
+            <div class="time-icon">
+              <i class="fas fa-building"></i>
+            </div>
+          </div>
+          <div class="position">Főmunkatárs, központi irattáros</div>
+          <div class="company">OMVH, KÖH</div>
+          <div class="description">
+            <p>Felelősségi körömbe tartozott a központi irattár menedzselése. Dokumentumkezelési rendszerek bevezetése, archívumok digitalizálása, valamint munkatársak képzése a digitális dokumentumkezelés terén.</p>
+            <p>Rendszergazdai feladatokat is elláttam, mely magában foglalta a hálózat karbantartását, hibaelhárítást és felhasználói támogatást.</p>
+          </div>
+        </div>
+        
+        <div class="resume-section">
+          <div class="time-period">
+            <div class="time-badge">1975 - 1984</div>
+            <div class="time-icon">
+              <i class="fas fa-tv"></i>
+            </div>
+          </div>
+          <div class="position">Technikus termelő munkán</div>
+          <div class="company">Magyar Televízió</div>
+          <div class="description">
+            <p>Erősáramú eszközök karbantartása, műszaki hibaelhárítás és stúdiótechnika támogatása. Részt vettem számos műsor technikai előkészítésében és lebonyolításában.</p>
+            <p>Felelősségi körömbe tartozott az erősáramú vezetékek és világítóberendezések karbantartása és beüzemelése.</p>
+          </div>
+        </div>
+        
+        <div class="resume-section">
+          <div class="time-period">
+            <div class="time-badge">1971 - 1975</div>
+            <div class="time-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+          </div>
+          <div class="position">Érintésvédelmi mérő</div>
+          <div class="company">KIPSZER</div>
+          <div class="description">
+            <p>Elektromos berendezések érintésvédelmi vizsgálatainak elvégzése, mérési jegyzőkönyvek készítése. Biztonsági előírások betartásának ellenőrzése és javaslatok kidolgozása a biztonság növelésére.</p>
+            <p>Kiemelt figyelmet fordítottam az ipari biztonsági előírások betartására és a munkavédelmi szabályok érvényesítésére.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Tanulmányok -->
+    <div class="box">
+      <section class="resume">
+        <h2><i class="fas fa-graduation-cap"></i> Szakképzettség, tanulmányok</h2>
+        
+        <div class="resume-section">
+          <div class="time-period">
+            <div class="time-badge">2002 - 2005</div>
+            <div class="time-icon">
+              <i class="fas fa-archive"></i>
+            </div>
+          </div>
+          <div class="position">Segédlevéltáros</div>
+          <div class="company">Magyar Országos Levéltár</div>
+          <div class="description">
+            <p>Levéltári dokumentumok kezelésének, rendszerezésének és tárolásának szabályainak elsajátítása. Történelmi dokumentumok restaurálásának alapjai, digitális archiválás módszertana.</p>
+            <p>Kutatói igények kiszolgálása, történelmi forrásanyagok feltárása és rendszerezése.</p>
+          </div>
+        </div>
+        
+        <div class="resume-section">
+          <div class="time-period">
+            <div class="time-badge">2000 - 2001</div>
+            <div class="time-icon">
+              <i class="fas fa-server"></i>
+            </div>
+          </div>
+          <div class="position">Rendszergazda</div>
+          <div class="company">Superior-Computer Bt</div>
+          <div class="description">
+            <p>Hálózati rendszerek telepítése, konfigurálása és karbantartása. Felhasználói fiókok kezelése, biztonsági mentések készítése, rendszeres karbantartási feladatok elvégzése.</p>
+            <p>Ügyfelek számára informatikai tanácsadás és technikai támogatás nyújtása.</p>
+          </div>
+        </div>
+        
+        <div class="resume-section">
+          <div class="time-period">
+            <div class="time-badge">2000 - 2001</div>
+            <div class="time-icon">
+              <i class="fas fa-network-wired"></i>
+            </div>
+          </div>
+          <div class="position">Rendszerinformatikus</div>
+          <div class="company">Soter-Line</div>
+          <div class="description">
+            <p>Hardverismeret, számítógépek, szerverek, perifériák felépítése, működése. 
+              Hálózati alapismeretek. Operációs rendszerek Telepítés, konfigurálás, 
+              jogosultságkezelés. Rendszergazdai feladatok: felhasználói fiókok kezelése, 
+              jogosultságok beállítása. Informatikai biztonság: Vírusok, kártevők elleni védelem.              
+            </p>
+            <p>
+              Szoftvertelepítés, licencelés, alkalmazások frissítése és konfigurálása.
+              Irodai programcsomagok üzemeltetése
+            </p>
+          </div>
+        </div>
+        
+        <div class="resume-section">
+          <div class="time-period">
+            <div class="time-badge">1967 - 1971</div>
+            <div class="time-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+          </div>
+          <div class="position">Erősáramú Technikus</div>
+          <div class="company">Erősáramú Technikum</div>
+          <div class="description">
+            <p>Erősáramú rendszerek tervezésének, telepítésének és karbantartásának alapjai. Elektromos hálózatok tervezése, biztonsági előírások ismerete.</p>
+            <p>Gyakorlati oktatás ipari környezetben, elektromos berendezések üzemeltetése és karbantartása.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p class="footer-text">© 2023 Csókos László - Önéletrajz | Minden jog fenntartva</p>
+      <p class="footer-text">"Az informatikai tudás nem csupán eszköz, hanem a jövő építőköve."</p>
+      <button class="print-btn" onclick="window.print()"><i class="fas fa-print"></i> Önéletrajz nyomtatása</button>
+    </div>
+  </footer>
+
+  <script>
+    // Animáció a skill bárokhoz
+    document.addEventListener('DOMContentLoaded', function() {
+      const skillFills = document.querySelectorAll('.skill-fill');
+      
+      // Opciók a megfigyelőhöz
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+      
+      // Megfigyelő létrehozása
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const width = entry.target.style.width;
+            entry.target.style.width = '0';
+            setTimeout(() => {
+              entry.target.style.width = width;
+            }, 300);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      
+      // Minden skill bar megfigyelése
+      skillFills.forEach(fill => {
+        observer.observe(fill);
+      });
+      
+      // Görgetés az elejére nyomtatás előtt
+      const printBtn = document.querySelector('.print-btn');
+      if (printBtn) {
+        printBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
